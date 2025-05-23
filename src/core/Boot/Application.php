@@ -30,7 +30,7 @@ class Application
     }
     private function loadRoutes(): void
     {
-        require_once __DIR__ . '/../../routes/web.php';
+        require_once getcwd() . '/../routes/web.php';
     }
 
     private function loadHelpers(): void
