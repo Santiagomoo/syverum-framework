@@ -14,7 +14,6 @@ class Factory
     private static function initBlade()
     {
         if (is_null(self::$blade)) {
-            define('BASE_PATH', dirname(__DIR__, 3));
 
             $mainViews = BASE_PATH . '/resources';
             $monitoringView = BASE_PATH . '/core/Panel/resources';

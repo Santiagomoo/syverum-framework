@@ -22,15 +22,14 @@ class Application
 
     private function loadEnv(): void
     {
-        $basePath = dirname(__DIR__, 2);
-            if (file_exists($basePath . '/.env')) {
-                $dotenv = Dotenv::createImmutable($basePath);
+            if (file_exists('.env')) {
+                $dotenv = Dotenv::createImmutable(BASE_PATH);
                 $dotenv->load();
             }
     }
     private function loadRoutes(): void
     {
-        require_once getcwd() . '/../routes/web.php';
+        require_once BASE_PATH .'/routes/web.php';
     }
 
     private function loadHelpers(): void
