@@ -22,10 +22,8 @@ class Application
 
     private function loadEnv(): void
     {
-            if (file_exists('.env')) {
-                $dotenv = Dotenv::createImmutable(BASE_PATH);
-                $dotenv->load();
-            }
+        $dotenv = Dotenv::createImmutable(BASE_PATH);
+        $dotenv->load();
     }
     private function loadRoutes(): void
     {
