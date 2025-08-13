@@ -2,31 +2,30 @@
 
 namespace Core\Routing;
 
+use Core\Http\Middleware\MiddlewareRunner;
+
 class RouteResolver extends RouteManager
 {
-
-    //Find the route by the method and endpoint
     public static function resolveRoute(string $method, string $endPoint, string $name = null)
     {
-
-        //Check the static property to see if the routes are set
         if (isset(self::$routes[$method])) {
             foreach (self::$routes[$method] as $route => &$value) {
                 if ($value['endPoint'] === $endPoint) {
 
                     $value['onUse'] = "on";
 
-                    
                     $controller = $value['controller'];
                     $function = $value['function'];
+                    $middleware = $value['middleware'] ?? null;
 
-
-                    //finding the method and function to create an instance
-                    if (method_exists($controller, $function)) {
-                        return (new $controller)->$function();
-                    } else {
-                        throw new \Exception("Metodo o clase no encontrada: " . $controller . " - " . $function);
-                    }
+                    // Ejecutar middleware y, si pasa, ejecutar el controlador
+                    return MiddlewareRunner::run($middleware, function () use ($controller, $function) {
+                        if (method_exists($controller, $function)) {
+                            return (new $controller)->$function();
+                        } else {
+                            throw new \Exception("Método o clase no encontrada: " . $controller . " - " . $function);
+                        }
+                    });
                 }
             }
         }

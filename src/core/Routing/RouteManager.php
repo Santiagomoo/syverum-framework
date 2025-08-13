@@ -12,7 +12,7 @@ class RouteManager
     
     protected static $lastMethod; //identify where the last method is registered in order to assign the correct name to each route
 
-    public static function addRoute(string $method, string $endPoint, array $action)
+    protected static function addRoute(string $method, string $endPoint, array $action)
     {
         self::$lastMethod = $method;
 
@@ -27,12 +27,13 @@ class RouteManager
             'controller' => $action[0],
             'function' => $action[1],
             'onUse' => 'off',
-            'routeName' => null
+            'routeName' => null,
+            'middleware' => null
         ];
 
     }
 
-    public static function addNameRoute(string $method, string $name)
+    protected static function addNameRoute(string $method, string $name)
     {
         $lastIndex = count(self::$routes[$method]) - 1;
         if ($lastIndex >= 0) {
@@ -41,6 +42,17 @@ class RouteManager
             throw new \Exception("Nombre invalido: " . $method);
         }   
     }
+
+    protected static function addMiddleware(string $method, string $middleware){
+        $lastIndex = count(self::$routes[$method]) - 1;
+        
+        if ($lastIndex >= 0) {
+            self::$routes[$method][$lastIndex]['middleware'] = $middleware;
+        } else {
+            throw new \Exception("Nombre invalido: " . $method);
+        }   
+    }
+
 
 
     protected static function getRoutes(){

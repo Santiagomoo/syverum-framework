@@ -28,6 +28,11 @@ class Route extends RouteManager
         return $this;
     }
 
+    public function middleware($middleware){
+        RouteManager::addMiddleware(RouteManager::$lastMethod, $middleware);
+        return $this;
+    }
+
 }
 
 ?>
