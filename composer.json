@@ -1,0 +1,22 @@
+{
+    "name": "syverum/framework",
+    "description": "Core del framework Syverum",
+    "license": "MIT",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/core/",
+            "App\\": "app/"
+        },
+        "files": [
+            "src/core/Support/DI/Helpers.php",
+            "src/core/Support/Http/Helpers.php",
+            "src/core/Support/Views/Helpers.php"
+        ]
+    },
+    "require": {
+        "php": "^8.1",
+        "jenssegers/blade": "2",
+        "vlucas/phpdotenv": "5"
+    }
+}
