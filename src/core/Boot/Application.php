@@ -23,6 +23,8 @@ class Application
     {
         // Boot the application with default kernels (DI, Routing, Middleware, Http, Controller, ViewRender, Panel, DB)
         // and App-level providers (e.g., middleware aliases)
+
+        
         $app = App::bootDefault([
             \App\Providers\MiddlewareServiceProvider::class,
         ]);

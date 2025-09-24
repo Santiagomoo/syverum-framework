@@ -18,7 +18,7 @@ class BladeRenderer implements ViewRendererInterface
         $root = BASE_PATH;
 
         if ($paths === []) {
-            $default = $root . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'views';
+            $default = $root . DIRECTORY_SEPARATOR . 'resources';
             if (is_dir($default)) {
                 $paths[] = $default;
             }
@@ -49,7 +49,7 @@ class BladeRenderer implements ViewRendererInterface
 
     public function render(string $view, array $data = []): string
     {
-        return $this->blade->render($view, $data);
+        return $this->blade->render('views/'. $view, $data);
     }
 
     public function addPath(string $path): void
