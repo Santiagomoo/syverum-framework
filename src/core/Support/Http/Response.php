@@ -25,6 +25,11 @@ class Response
         return new self($status, $headers, $content);
     }
 
+    public static function json(mixed $data, int $status = 200, array $headers = []): JsonResponse
+    {
+        return new JsonResponse($data, $status, $headers);
+    }
+
     public function status(): int { return $this->status; }
     /** @return array<string,string> */
     public function headers(): array { return $this->headers; }
